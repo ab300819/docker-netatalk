@@ -47,6 +47,7 @@ RUN ./configure \
         default-mysql-client \
         libcrack2 \
         libdbus-glib-1-2 \
+        libssl1.1 \
         &&  apt-get --quiet --yes autoclean \
          &&  apt-get --quiet --yes autoremove \
           &&  apt-get --quiet --yes clean \

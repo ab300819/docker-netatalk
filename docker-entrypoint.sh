@@ -29,9 +29,9 @@ chown "${AFP_USER}" /media/timemachine
 sed -i'' -e "s,%USER%,${AFP_USER:-},g" /etc/afp.conf
 sed -i'' -e "s,%LIMIT_SIZE%,${LIMIT_SIZE:-460800},g" /etc/afp.conf
 
-echo ---begin-afp.conf--
+echo "--- begin --- afp.conf ---"
 cat /etc/afp.conf
-echo ---end---afp.conf--
+echo "\n---- end --- afp.conf ----"
 
 mkdir -p /var/run/dbus
 rm -f /var/run/dbus/pid
