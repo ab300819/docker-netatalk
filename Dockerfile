@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:buster
 ENV NETATALK_VERSION 3.1.12
 
 ENV DEPS="build-essential libevent-dev libssl-dev libgcrypt-dev libkrb5-dev libpam0g-dev libwrap0-dev libdb-dev libtdb-dev default-libmysqlclient-dev avahi-daemon libavahi-client-dev libacl1-dev libldap2-dev libcrack2-dev systemtap-sdt-dev libdbus-1-dev libdbus-glib-1-dev libglib2.0-dev libio-socket-inet6-perl tracker libtracker-sparql-2.0-dev libtracker-miner-2.0-dev file"
@@ -31,7 +31,7 @@ RUN ./configure \
         --enable-krbV-uam \
         --with-pam-confdir=/etc/pam.d \
         --with-dbus-sysconf-dir=/etc/dbus-1/system.d \
-        --with-tracker-pkgconfig-version=1.0 \
+        --with-tracker-pkgconfig-version=2.0 \
         &&  make \
          &&  make install \
           &&  apt-get --quiet --yes purge --auto-remove \
