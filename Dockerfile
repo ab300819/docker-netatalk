@@ -33,15 +33,15 @@ RUN ./configure \
         --with-dbus-sysconf-dir=/etc/dbus-1/system.d \
         --with-tracker-pkgconfig-version=2.0 \
         &&  make \
-         &&  make install \
-          &&  apt-get --quiet --yes purge --auto-remove \
+            &&  make install \
+                &&  apt-get --quiet --yes purge --auto-remove \
         $DEPS \
         tracker-gui \
         libgl1-mesa-dri \
         &&  DEBIAN_FRONTEND=noninteractive apt-get install --yes \
-        libevent-2.0 \
         libavahi-client3 \
-        libevent-core-2.0 \
+        libevent-2.1-6 \
+        libevent-core-2.1-6 \
         libwrap0 \
         libtdb1 \
         default-mysql-client \
@@ -52,14 +52,8 @@ RUN ./configure \
          &&  apt-get --quiet --yes autoremove \
           &&  apt-get --quiet --yes clean \
            &&  rm -rf /netatalk* \
-            &&  rm -rf /usr/share/man \
-             &&  rm -rf /usr/share/doc \
-              &&  rm -rf /usr/share/icons \
-               &&  rm -rf /usr/share/poppler \
-                &&  rm -rf /usr/share/mime \
-                 &&  rm -rf /usr/share/GeoIP \
-                  &&  rm -rf /var/lib/apt/lists* \
-                   &&  mkdir /media/share
+            &&  mkdir /media/share \
+                && mdir /media/timemachine
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY afp.conf /etc/afp.conf
