@@ -53,7 +53,7 @@ RUN ./configure \
           &&  apt-get --quiet --yes clean \
            &&  rm -rf /netatalk* \
             &&  mkdir /media/share \
-                && mdir /media/timemachine
+                && mkdir /media/timemachine
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY afp.conf /etc/afp.conf
