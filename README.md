@@ -97,3 +97,11 @@ This work is made possible with the great services from [Docker] and [GitHub].
 [Docker]: https://www.docker.com/
 [GitHub]: https://www.github.com/
 [Avahi]: http://www.avahi.org/
+
+---
+
+[Install Netatalk 3.1.12 on Debian 9 Stretch](http://netatalk.sourceforge.net/wiki/index.php/Install_Netatalk_3.1.12_on_Debian_9_Stretch)
+
+```shell
+docker run -d --name=netatalk-latest --net=host -e AFP_USER=$(id -un) -e AFP_PASSWORD=110119 -e AFP_UID=$(id -u) -e AFP_GID=$(id -g) -v /media/timemachine:/media/timemachine google2015/docker-netatalk:latest
+```
