@@ -11,7 +11,6 @@ ENV DEPS="build-essential \
         libdb-dev \
         libtdb-dev \
         libmariadbclient-dev \
-        avahi-daemon \
         libavahi-client-dev \
         libacl1-dev \
         libldap2-dev \
@@ -23,7 +22,8 @@ ENV DEPS="build-essential \
         libio-socket-inet6-perl \
         tracker \
         libtracker-sparql-1.0-dev \
-        libtracker-miner-1.0-dev"
+        libtracker-miner-1.0-dev \
+        axel"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -38,7 +38,6 @@ RUN apt-get update && \
             --assume-yes \
             $DEPS \
             avahi-daemon \
-            axel \
             vim && \
     axel "http://ufpr.dl.sourceforge.net/project/netatalk/netatalk/${NETATALK_VERSION}/netatalk-${NETATALK_VERSION}.tar.bz2" && \
     tar xvf "netatalk-${NETATALK_VERSION}.tar.bz2"
@@ -60,11 +59,10 @@ RUN ./configure \
     make install && \
     apt-get install --yes \
         libavahi-client3 \
-        libevent-2.1-6 \
-        libevent-core-2.1-6 \
+        libevent-2.0-5 \
+        libevent-core-2.0-5 \
         libwrap0 \
         libtdb1 \
-        default-mysql-client \
         libcrack2 \
         libdbus-glib-1-2 \
         libssl1.1 && \
@@ -74,6 +72,8 @@ RUN ./configure \
     rm -rf /home/netatalk* && \
     mkdir /media/share && \
     mkdir /media/timemachine
+
+WORKDIR /home
 
 COPY docker-entrypoint.sh /home/docker-entrypoint.sh
 COPY afp.conf /etc/afp.conf
