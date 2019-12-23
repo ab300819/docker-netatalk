@@ -1,7 +1,7 @@
 FROM debian:stretch
 ENV NETATALK_VERSION 3.1.12
 
-ENV DEPS="build-essentia \
+ENV DEPS="build-essential \
         libevent-dev \
         libssl-dev \
         libgcrypt-dev \
@@ -47,6 +47,7 @@ WORKDIR /home/netatalk-${NETATALK_VERSION}
 
 RUN ./configure \
         --with-init-style=debian-systemd \
+        --sysconfdir=/etc \
         --without-libevent \
         --without-tdb \
         --with-cracklib \
@@ -57,8 +58,18 @@ RUN ./configure \
         --with-tracker-pkgconfig-version=1.0 && \
     make && \
     make install && \
-    apt-get --quiet --yes autoclean && \
+    apt-get install --yes \
+        libavahi-client3 \
+        libevent-2.1-6 \
+        libevent-core-2.1-6 \
+        libwrap0 \
+        libtdb1 \
+        default-mysql-client \
+        libcrack2 \
+        libdbus-glib-1-2 \
+        libssl1.1 && \
     apt-get --quiet --yes autoremove && \
+    apt-get --quiet --yes autoclean && \
     apt-get --quiet --yes clean && \
     rm -rf /home/netatalk* && \
     mkdir /media/share && \
